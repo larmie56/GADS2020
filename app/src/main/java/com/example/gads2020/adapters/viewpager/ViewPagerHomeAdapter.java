@@ -14,11 +14,11 @@ public class ViewPagerHomeAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return null;
+        return position == 0 ? new LearningLeadersFragment() : new SkillIqLeadersFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 2;
     }
 }
