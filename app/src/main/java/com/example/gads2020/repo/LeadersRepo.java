@@ -5,8 +5,10 @@ import com.example.gads2020.models.SkillIqLeaders;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 public interface LeadersRepo {
 
-    List<LearningLeaders> getLearningLeaders();
-    List<SkillIqLeaders> getSkillIqLeaders();
+    Single<List<LearningLeaders>> getLearningLeaders();
+    Single<List<SkillIqLeaders>> getSkillIqLeaders();
 }

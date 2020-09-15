@@ -6,6 +6,8 @@ import com.example.gads2020.models.SkillIqLeaders;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 public class LeadersRepoImpl implements LeadersRepo {
 
     Service mService;
@@ -14,12 +16,12 @@ public class LeadersRepoImpl implements LeadersRepo {
         mService = service;
     }
     @Override
-    public List<LearningLeaders> getLearningLeaders() {
+    public Single<List<LearningLeaders>> getLearningLeaders() {
         return mService.getLearningLeaders();
     }
 
     @Override
-    public List<SkillIqLeaders> getSkillIqLeaders() {
+    public Single<List<SkillIqLeaders>> getSkillIqLeaders() {
         return mService.getSkillIqLeaders();
     }
 }
