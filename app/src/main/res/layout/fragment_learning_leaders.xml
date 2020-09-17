@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_skill_iq_leaders"
+        android:id="@+id/recycler_learning_leaders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/learning_leaders_item"/>
