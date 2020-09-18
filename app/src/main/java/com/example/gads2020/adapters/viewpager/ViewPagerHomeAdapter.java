@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.gads2020.LearningLeadersFragment;
-import com.example.gads2020.SkillIqLeadersFragment;
+import com.example.gads2020.ui.learning_leaders.LearningLeadersFragment;
+import com.example.gads2020.ui.skill_iq_leaders.SkillIqLeadersFragment;
 
 public class ViewPagerHomeAdapter extends FragmentStateAdapter {
 

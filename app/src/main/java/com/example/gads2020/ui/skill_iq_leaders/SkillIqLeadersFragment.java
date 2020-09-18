@@ -1,4 +1,4 @@
-package com.example.gads2020;
+package com.example.gads2020.ui.skill_iq_leaders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gads2020.R;
 import com.example.gads2020.adapters.recycler_view.SkillIqLeadersAdapter;
+import com.example.gads2020.ui.main_activity.MainActivity;
+import com.example.gads2020.ui.main_activity.MainActivityViewModel;
+import com.example.gads2020.ui.main_activity.MainActivityViewModelFactory;
 
 public class SkillIqLeadersFragment extends Fragment {
 

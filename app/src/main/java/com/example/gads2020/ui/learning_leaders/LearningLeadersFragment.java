@@ -1,4 +1,4 @@
-package com.example.gads2020;
+package com.example.gads2020.ui.learning_leaders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,15 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gads2020.R;
 import com.example.gads2020.adapters.recycler_view.LearningLeadersAdapter;
-import com.example.gads2020.api.Service;
-import com.example.gads2020.repo.LeadersRepo;
-import com.example.gads2020.repo.LeadersRepoImpl;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.gads2020.ui.main_activity.MainActivity;
+import com.example.gads2020.ui.main_activity.MainActivityViewModel;
+import com.example.gads2020.ui.main_activity.MainActivityViewModelFactory;
 
 public class LearningLeadersFragment extends Fragment {
 

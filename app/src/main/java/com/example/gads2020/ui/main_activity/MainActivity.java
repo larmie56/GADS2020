@@ -1,4 +1,4 @@
-package com.example.gads2020;
+package com.example.gads2020.ui.main_activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,13 +7,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
+import com.example.gads2020.BuildConfig;
+import com.example.gads2020.R;
 import com.example.gads2020.adapters.viewpager.ViewPagerHomeAdapter;
 import com.example.gads2020.api.Service;
 import com.example.gads2020.repo.LeadersRepo;
 import com.example.gads2020.repo.LeadersRepoImpl;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.gson.Gson;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

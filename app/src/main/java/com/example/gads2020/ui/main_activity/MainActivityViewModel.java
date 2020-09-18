@@ -1,4 +1,4 @@
-package com.example.gads2020;
+package com.example.gads2020.ui.main_activity;
 
 import android.util.Log;
 
@@ -22,9 +22,9 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivityViewModel extends ViewModel {
 
     private LeadersRepo mRepo;
-    private MutableLiveData<List<LearningLeaders>> mLearningLeadersLiveData;
-    private MutableLiveData<List<SkillIqLeaders>> mSkillIqLeadersLiveData;
-    private CompositeDisposable mDisposable;
+    private MutableLiveData<List<LearningLeaders>> mLearningLeadersLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<SkillIqLeaders>> mSkillIqLeadersLiveData = new MutableLiveData<>();
+    private CompositeDisposable mDisposable = new CompositeDisposable();
 
     public MainActivityViewModel(LeadersRepo repo) {
         mRepo = repo;
