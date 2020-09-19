@@ -3,4 +3,6 @@
     <string name="learning_leaders_icon">Learning leaders icon</string>
     <string name="placeholder">Placeholder</string>
     <string name="skill_iq_icon">Skill IQ Icon</string>
+    <string name="leaderboard">LEADERBOARD</string>
+    <string name="submit">Submit</string>
 </resources>
