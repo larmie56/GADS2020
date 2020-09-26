@@ -35,6 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
         <FrameLayout
+            android:id="@+id/container_submit"
             android:layout_width="100dp"
             android:layout_height="24dp"
             android:background="@drawable/white_button"
