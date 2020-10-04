@@ -11,4 +11,13 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <style name="submission_text">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
 </resources>
