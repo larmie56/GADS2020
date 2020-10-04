@@ -28,10 +28,10 @@
         app:layout_constraintTop_toBottomOf="@id/image_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/button_yes"/>
+        app:layout_constraintBottom_toBottomOf="@id/button_confirm"/>
 
     <Button
-        android:id="@+id/button_yes"
+        android:id="@+id/button_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/yes"

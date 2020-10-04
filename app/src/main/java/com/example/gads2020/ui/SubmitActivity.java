@@ -6,13 +6,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gads2020.R;
 import com.example.gads2020.ui.main_activity.MainActivity;
 
-public class SubmitActivity extends AppCompatActivity {
+public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissionDialog.ConfirmSubmissionDialogListener {
 
     private ImageView mBackArrow;
     private EditText mFirstNameEdit;
@@ -24,6 +25,7 @@ public class SubmitActivity extends AppCompatActivity {
     private String mLastName;
     private String mEmail;
     private String mProjectLink;
+    private ConfirmSubmissionDialog mDialog;
 
     @Override
     public void onCreate(Bundle onSavedInstanceState) {
@@ -60,8 +62,8 @@ public class SubmitActivity extends AppCompatActivity {
     }
 
     private void makeSubmission() {
-        ConfirmSubmissionDialog dialog = new ConfirmSubmissionDialog();
-        dialog.show(getSupportFragmentManager(), "Confirm Submission");
+        mDialog = new ConfirmSubmissionDialog();
+        mDialog.show(getSupportFragmentManager(), "Confirm Submission");
     }
 
     private void initViews() {
@@ -71,5 +73,16 @@ public class SubmitActivity extends AppCompatActivity {
         mEmailEdit = findViewById(R.id.edit_email);
         mProjectLinkEdit = findViewById(R.id.edit_project_link);
         mSubmitButton = findViewById(R.id.button_submit);
+    }
+
+    @Override
+    public void submissionCancelled() {
+        mDialog.dismiss();
+    }
+
+    @Override
+    public void submissionConfirmed() {
+        Toast.makeText(this, "Submission Confirmed", Toast.LENGTH_SHORT).show();
+        mDialog.dismiss();
     }
 }
