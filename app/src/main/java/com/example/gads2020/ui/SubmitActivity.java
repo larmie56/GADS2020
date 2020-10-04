@@ -29,6 +29,7 @@ public class SubmitActivity extends AppCompatActivity {
     public void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
 
+        setContentView(R.layout.activity_submit);
         initViews();
         attachClickListeners();
     }
@@ -54,10 +55,13 @@ public class SubmitActivity extends AppCompatActivity {
         mLastName = mLastNameEdit.getText().toString();
         mEmail = mEmailEdit.getText().toString();
         mProjectLink = mProjectLinkEdit.getText().toString();
+
+        makeSubmission();
     }
 
     private void makeSubmission() {
-
+        ConfirmSubmissionDialog dialog = new ConfirmSubmissionDialog();
+        dialog.show(getSupportFragmentManager(), "Confirm Submission");
     }
 
     private void initViews() {

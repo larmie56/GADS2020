@@ -14,7 +14,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/text_confirm_submission"
-        app:tint="#696969" />
+        app:tint="#696969"
+        app:layout_constraintVertical_chainStyle="spread"/>
 
     <TextView
         android:id="@+id/text_confirm_submission"

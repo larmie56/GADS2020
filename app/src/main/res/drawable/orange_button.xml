@@ -6,8 +6,8 @@
         android:centerColor="@color/orange"
         android:endColor="@color/orange"
         android:gradientRadius="100"
-        android:centerX="1-"
-        android:centerY=""
+        android:centerX="0.01"
+        android:centerY="0.1"
         android:type="radial"/>
     <padding android:right="50dp"
         android:left="50dp"
