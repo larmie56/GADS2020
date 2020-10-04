@@ -56,6 +56,10 @@ public class SubmitActivity extends AppCompatActivity {
         mProjectLink = mProjectLinkEdit.getText().toString();
     }
 
+    private void makeSubmission() {
+
+    }
+
     private void initViews() {
         mBackArrow = findViewById(R.id.image_back_arrow);
         mFirstNameEdit = findViewById(R.id.edit_first_name);
