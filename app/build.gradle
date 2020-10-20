@@ -23,6 +23,7 @@ android {
 
     defaultConfig {
         buildConfigField "String", "BASE_URL", "\"https://gadsapi.herokuapp.com\""
+        buildConfigField "String", "POST_BASE_URL", "\" https://docs.google.com/forms/d/e/\""
     }
 
     compileOptions {

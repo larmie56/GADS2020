@@ -1,4 +1,4 @@
-package com.example.gads2020.ui;
+package com.example.gads2020.ui.submit_activity;
 
 import android.app.Dialog;
 import android.content.Context;

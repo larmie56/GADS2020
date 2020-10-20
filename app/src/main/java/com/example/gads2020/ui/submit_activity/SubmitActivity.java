@@ -1,4 +1,4 @@
-package com.example.gads2020.ui;
+package com.example.gads2020.ui.submit_activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,17 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.gads2020.BuildConfig;
 import com.example.gads2020.R;
+import com.example.gads2020.api.RetrofitSingleton;
+import com.example.gads2020.api.Service;
+import com.example.gads2020.repo.SubmitProjectRepo;
+import com.example.gads2020.repo.SubmitProjectRepoImpl;
 import com.example.gads2020.ui.main_activity.MainActivity;
+
+import retrofit2.Retrofit;
 
 public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissionDialog.ConfirmSubmissionDialogListener {
 
@@ -26,6 +34,7 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
     private String mEmail;
     private String mProjectLink;
     private ConfirmSubmissionDialog mDialog;
+    private SubmitActivityViewModel mSubmitActivityViewModel;
 
     @Override
     public void onCreate(Bundle onSavedInstanceState) {
@@ -47,7 +56,7 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSubmissionInfo();
+                makeSubmission();
             }
         });
     }
@@ -57,8 +66,6 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
         mLastName = mLastNameEdit.getText().toString();
         mEmail = mEmailEdit.getText().toString();
         mProjectLink = mProjectLinkEdit.getText().toString();
-
-        makeSubmission();
     }
 
     private void makeSubmission() {
@@ -73,6 +80,7 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
         mEmailEdit = findViewById(R.id.edit_email);
         mProjectLinkEdit = findViewById(R.id.edit_project_link);
         mSubmitButton = findViewById(R.id.button_submit);
+        mSubmitActivityViewModel = new ViewModelProvider(this).get(SubmitActivityViewModel.class);
     }
 
     @Override
@@ -83,6 +91,14 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
     @Override
     public void submissionConfirmed() {
         Toast.makeText(this, "Submission Confirmed", Toast.LENGTH_SHORT).show();
+        getSubmissionInfo();
+        Retrofit retrofit = RetrofitSingleton.getRetrofit(BuildConfig.POST_BASE_URL);
+        SubmitProjectRepo repo = new SubmitProjectRepoImpl(retrofit.create(Service.class));
+        mSubmitActivityViewModel.submitProject(repo, mEmail, mFirstName, mLastName, mProjectLink);
         mDialog.dismiss();
+    }
+
+    private void submissionResult() {
+
     }
 }

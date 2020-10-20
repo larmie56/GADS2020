@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.SubmitActivity" />
+        <activity android:name=".ui.submit_activity.SubmitActivity" />
     </application>
 
 </manifest>

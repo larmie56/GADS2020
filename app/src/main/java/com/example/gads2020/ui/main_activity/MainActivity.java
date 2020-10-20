@@ -13,10 +13,11 @@ import android.widget.FrameLayout;
 import com.example.gads2020.BuildConfig;
 import com.example.gads2020.R;
 import com.example.gads2020.adapters.viewpager.ViewPagerHomeAdapter;
+import com.example.gads2020.api.RetrofitSingleton;
 import com.example.gads2020.api.Service;
 import com.example.gads2020.repo.LeadersRepo;
 import com.example.gads2020.repo.LeadersRepoImpl;
-import com.example.gads2020.ui.SubmitActivity;
+import com.example.gads2020.ui.submit_activity.SubmitActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -60,12 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attach();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(new OkHttpClient())
-                .build();
+        Retrofit retrofit = RetrofitSingleton.getRetrofit(BuildConfig.BASE_URL);
 
         Service service = retrofit.create(Service.class);
         mLeadersRepo = new LeadersRepoImpl(service);
