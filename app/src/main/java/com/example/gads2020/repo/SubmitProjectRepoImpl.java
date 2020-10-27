@@ -3,6 +3,7 @@ package com.example.gads2020.repo;
 import com.example.gads2020.api.Service;
 
 import io.reactivex.Completable;
+import io.reactivex.Single;
 import retrofit2.Call;
 
 public class SubmitProjectRepoImpl implements SubmitProjectRepo {
@@ -12,7 +13,7 @@ public class SubmitProjectRepoImpl implements SubmitProjectRepo {
         mService = service;
     }
     @Override
-    public Completable submitProject(String emailAddress, String name, String lastName, String projectLink) {
+    public Single<Call<Void>> submitProject(String emailAddress, String name, String lastName, String projectLink) {
         return mService.submitProject(emailAddress, name, lastName, projectLink);
     }
 }

@@ -11,6 +11,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SubmitActivityViewModel extends ViewModel {
 
@@ -22,15 +25,24 @@ public class SubmitActivityViewModel extends ViewModel {
         mDisposable = submitProjectRepo.submitProject(emailAddress, name, lastName, projectLink)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action() {
+                .subscribe(new Consumer<Call<Void>>() {
                     @Override
-                    public void run() throws Exception {
-                        isSuccessful.postValue(true);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        isSuccessful.postValue(false);
+                    public void accept(Call<Void> voidCall) throws Exception {
+                        voidCall.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()) {
+                                    isSuccessful.postValue(true);
+                                } else {
+                                    isSuccessful.postValue(false);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                isSuccessful.postValue(false);
+                            }
+                        });
                     }
                 });
     }
