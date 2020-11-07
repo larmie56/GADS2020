@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.example.gads2020.BuildConfig;
 import com.example.gads2020.R;
 import com.example.gads2020.adapters.viewpager.ViewPagerHomeAdapter;
+import com.example.gads2020.api.RetrofitSingleton;
 import com.example.gads2020.api.Service;
 import com.example.gads2020.repo.LeadersRepo;
 import com.example.gads2020.repo.LeadersRepoImpl;
+import com.example.gads2020.ui.submit_activity.SubmitActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -22,9 +27,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager2 mViewPagerHome;
-    MainActivityViewModel mMainActivityViewModel;
+    private ViewPager2 mViewPagerHome;
+    private MainActivityViewModel mMainActivityViewModel;
     private LeadersRepo mLeadersRepo;
+    private FrameLayout mContainer_submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContainer_submit = findViewById(R.id.container_submit);
+        mContainer_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SubmitActivity.class));
+            }
+        });
         mViewPagerHome = findViewById(R.id.viewpager_home);
         ViewPagerHomeAdapter viewPagerHomeAdapter = new ViewPagerHomeAdapter(this);
         mViewPagerHome.setAdapter(viewPagerHomeAdapter);
@@ -48,12 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attach();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(new OkHttpClient())
-                .build();
+        Retrofit retrofit = RetrofitSingleton.getRetrofit(BuildConfig.BASE_URL);
 
         Service service = retrofit.create(Service.class);
         mLeadersRepo = new LeadersRepoImpl(service);

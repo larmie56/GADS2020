@@ -3,4 +3,15 @@
     <string name="learning_leaders_icon">Learning leaders icon</string>
     <string name="placeholder">Placeholder</string>
     <string name="skill_iq_icon">Skill IQ Icon</string>
+    <string name="leaderboard">LEADERBOARD</string>
+    <string name="submit">Submit</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="project_link">Project on GITHUB (link)</string>
+    <string name="project_submission">Project Submission</string>
+    <string name="confirm_submission">Are you sure ?</string>
+    <string name="yes">Yes</string>
+    <string name="submission_successful">Submission Successful</string>
+    <string name="submission_not_successful">Submission not Successful</string>
 </resources>
