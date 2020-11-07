@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.gads2020.BuildConfig;
@@ -23,6 +24,8 @@ import retrofit2.Retrofit;
 
 public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissionDialog.ConfirmSubmissionDialogListener {
 
+    //TODO: Add a progress bar while project submission is going on
+
     private ImageView mBackArrow;
     private EditText mFirstNameEdit;
     private EditText mLastNameEdit;
@@ -33,7 +36,7 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
     private String mLastName;
     private String mEmail;
     private String mProjectLink;
-    private ConfirmSubmissionDialog mDialog;
+    private ConfirmSubmissionDialog mConfirmSubmissionDialog;
     private SubmitActivityViewModel mSubmitActivityViewModel;
 
     @Override
@@ -43,6 +46,12 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
         setContentView(R.layout.activity_submit);
         initViews();
         attachClickListeners();
+        mSubmitActivityViewModel.getIsSuccessful().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                submissionResult();
+            }
+        });
     }
 
     private void attachClickListeners() {
@@ -69,8 +78,8 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
     }
 
     private void makeSubmission() {
-        mDialog = new ConfirmSubmissionDialog();
-        mDialog.show(getSupportFragmentManager(), "Confirm Submission");
+        mConfirmSubmissionDialog = new ConfirmSubmissionDialog();
+        mConfirmSubmissionDialog.show(getSupportFragmentManager(), "Confirm Submission");
     }
 
     private void initViews() {
@@ -85,7 +94,7 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
 
     @Override
     public void submissionCancelled() {
-        mDialog.dismiss();
+        mConfirmSubmissionDialog.dismiss();
     }
 
     @Override
@@ -95,10 +104,18 @@ public class SubmitActivity extends AppCompatActivity implements ConfirmSubmissi
         Retrofit retrofit = RetrofitSingleton.getRetrofit(BuildConfig.POST_BASE_URL);
         SubmitProjectRepo repo = new SubmitProjectRepoImpl(retrofit.create(Service.class));
         mSubmitActivityViewModel.submitProject(repo, mEmail, mFirstName, mLastName, mProjectLink);
-        mDialog.dismiss();
+        mConfirmSubmissionDialog.dismiss();
     }
 
     private void submissionResult() {
-
+        if (mSubmitActivityViewModel.getIsSuccessful().getValue()) {
+            //Open success dialog
+            SubmissionSuccessfulDialog submissionSuccessfulDialog = new SubmissionSuccessfulDialog();
+            submissionSuccessfulDialog.show(getSupportFragmentManager(), "Submission Successful");
+        } else {
+            //Open failure dialog
+            SubmissionFailedDialog submissionFailedDialog = new SubmissionFailedDialog();
+            submissionFailedDialog.show(getSupportFragmentManager(), "Submission Failed");
+        }
     }
 }

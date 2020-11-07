@@ -8,7 +8,6 @@ import com.example.gads2020.repo.SubmitProjectRepo;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -31,7 +30,7 @@ public class SubmitActivityViewModel extends ViewModel {
                         voidCall.enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                if (response.isSuccessful()) {
+                                if (response.code() == 200) {
                                     isSuccessful.postValue(true);
                                 } else {
                                     isSuccessful.postValue(false);
@@ -43,6 +42,11 @@ public class SubmitActivityViewModel extends ViewModel {
                                 isSuccessful.postValue(false);
                             }
                         });
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        isSuccessful.postValue(false);
                     }
                 });
     }
